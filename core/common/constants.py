@@ -1,0 +1,1 @@
+BASE_STATIC_ENTRY_FOLDER = 'sms_dev'
