@@ -9,6 +9,10 @@ from .helper.function import (
     register_user
 )
 
+from .serializers.user_serializers import (
+    GetAuthorizedUserSerializer
+)
+
 from core.utils.custom_validators import is_email
 
 logger = logging.getLogger('accounts')
@@ -73,6 +77,22 @@ class RegisterUserView(APIView):
             }, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             logger.error(f'views/RegisterUserView/post: {e}')
+            return Response({
+                'error': 'Something Went Wrong. We are Working on it!',
+                'data': None
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class GetAuthorizedUserView(APIView):
+    def get(self, request):
+        try:
+            user = request.user
+            serializer = GetAuthorizedUserSerializer(user)
+            return Response({
+                'success': 'User Fetched Successfully',
+                'data': serializer.data
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            logger.error(f'views/GetAuthorizedUserView/get: {e}')
             return Response({
                 'error': 'Something Went Wrong. We are Working on it!',
                 'data': None
