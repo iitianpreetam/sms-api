@@ -40,7 +40,7 @@ SECRET_KEY = os.getenv(key='SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'web-production-ebc2.up.railway.app',
+    'sms-api.up.railway.app',
     '127.0.0.1'
 ]
 
